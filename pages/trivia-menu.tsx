@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { TitleLarge } from '@/design_system';
-import { styles } from '../../design_system/styles/trivia.style';
+import { styles } from '../design_system/styles/trivia.style';
 import Link from 'next/link';
 import { Avatar } from '@/components';
 import { useAppContext } from '@/src/app.provider';
@@ -25,14 +25,14 @@ export default function TriviaMenu() {
           <Link
             style={styles.button}
             href={{
-              pathname: '/trivia/join',
+              pathname: '/join',
             }}>
             Play
           </Link>
           <Link
             style={styles.button}
             href={{
-              pathname: '/trivia/games',
+              pathname: '/games',
             }}>
             Ranking
           </Link>

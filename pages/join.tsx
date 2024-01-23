@@ -2,7 +2,7 @@
 
 import React, { createContext, ReactNode, useContext, useEffect } from 'react';
 import { PrimaryButton, TextButton, TextField, TitleLarge } from '@/design_system';
-import { styles } from '../../design_system/styles/join.style';
+import { styles } from '../design_system/styles/join.style';
 import { useRouter } from 'next/router';
 import { useAppContext } from '@/src/app.provider';
 import { MoodFace } from '@/components';
@@ -20,7 +20,7 @@ export default function JoinGame() {
   useEffect(() => {
     if (gameState.gameOn && gameState.players?.length === 2) {
       console.log(gameState)
-      router.push('/trivia/game-screen');
+      router.push('/game-screen');
     }
   }, [gameState.gameOn, gameState.players]);
 

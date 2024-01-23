@@ -2,14 +2,10 @@
 
 import React, { useEffect, useState } from 'react';
 import { PrimaryButton, TitleLarge } from '@/design_system';
-import { styles } from '../../design_system/styles/trivia.style';
-import Link from 'next/link';
-import { Avatar } from '@/components';
+import { styles } from '../design_system/styles/trivia.style';
 import { useAppContext } from '@/src/app.provider';
 import { toast } from 'react-hot-toast';
-import AppProvider from '@/src/app.provider';
 import { useRouter } from 'next/router';
-import { JumpingQuestion } from '../../components/jumping_question';
 import { TextField } from '@/design_system';
 import { OldMan } from '@/components/old_man_auth';
 
@@ -38,7 +34,7 @@ export default function TriviaAuth() {
       await signin(username, password);
       setIsSubmitting(false);
       if (authState.authToken) {
-        router.push('/trivia/trivia-menu');
+        router.push('/trivia-menu');
       } else {
         setOldManText("Oooops, your username or password is not correct!")
       }

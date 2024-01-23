@@ -2,7 +2,7 @@
 
 import React, { useEffect } from 'react';
 import { Colors, IconCrossMark, PrimaryButton, TitleLarge } from '@/design_system';
-import { styles } from '../../design_system/styles/_game-screen.style';
+import { styles } from '../design_system/styles/_game-screen.style';
 import { useRouter } from 'next/router';
 import { useAppContext } from '@/src/app.provider';
 import { MoodFace } from '@/components';
@@ -31,7 +31,7 @@ export default function TriviaGame() {
       setTimeout(() => {
         clearGame();
         clearSocketGame();
-        router.push('/trivia/trivia-menu');
+        router.push('/trivia-menu');
       }, 3000);
     }
   }, [gameState.gameResult]);
@@ -51,7 +51,7 @@ export default function TriviaGame() {
               <div
                 style={styles.close}
                 onClick={() => {
-                  router.replace('/trivia');
+                  router.replace('/');
                 }}>
                 <IconCrossMark />
               </div>
