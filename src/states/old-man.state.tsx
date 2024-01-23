@@ -1,6 +1,4 @@
 import { useEffect, useState } from 'react';
-import { JsonData, JsonDataArray } from '../models';
-import jsonData from '@/example-data.json';
 
 export function useOldManState() {
   //  ╔═╗╔╦╗╔═╗╔╦╗╔═╗

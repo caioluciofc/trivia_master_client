@@ -3,8 +3,14 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation'
 
-export default function TriviaGame() {
+export default function HomeView() {
   const router = useRouter()
 
-  return (router.push('/trivia'));
+  useEffect(() => {
+    router.push('/trivia')
+  }, [])
+
+  return (
+    <div>Trivia Master</div>
+  );
 }
