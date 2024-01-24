@@ -64,6 +64,7 @@ export default function useGameState() {
   function _clearGame() {
     setGameState((current) => ({
       ...current,
+      isLoading: false,
       roomId: undefined,
       gameStatus: undefined,
       gameOn: false,
@@ -136,7 +137,7 @@ export default function useGameState() {
       } else if (response.roundStatus === 'FINISHED') {
         if (response.result === 'DRAW') {
           _setGameResult('draw');
-        } else if (response.result === username) {
+        } else if (response.result == username) {
           _setGameResult('win');
         } else {
           _setGameResult('lost');
