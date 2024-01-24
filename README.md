@@ -1,6 +1,6 @@
-## Json Data Viewer
+## Trivia Master Client
 
-This code was designed to render data tables containing children data or not using a JSON file.
+This code was designed to play the Trivia Master Game
 
 To run it, just type:
 
