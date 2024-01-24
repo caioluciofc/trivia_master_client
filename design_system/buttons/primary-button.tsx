@@ -27,6 +27,8 @@ const styles: CustomStyle = {
     textTransform: 'uppercase',
     borderCollapse: 'collapse',
     borderRadius: 16,
+    border: '2px solid black',
+    borderColor: Colors.white, 
     backgroundColor: Colors.primary,
     display: 'flex',
     flexDirection: 'column',

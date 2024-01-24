@@ -5,16 +5,17 @@ import { PrimaryButton, TextButton, TextField, TitleLarge } from '@/design_syste
 import { styles } from '../design_system/styles/join.style';
 import { useRouter } from 'next/router';
 import { useAppContext } from '@/src/app.provider';
-import { MoodFace } from '@/components';
 import { JumpingQuestion } from '@/components';
+import { OldMan } from '@/components';
 
 export default function JoinGame() {
-  const { authState, socketState, enterQueue, gameState } = useAppContext();
+  const { authState, socketState, enterQueue, gameState, setOldManText } = useAppContext();
 
   useEffect(() => {
     if (!gameState.roomId) {
       enterQueue(authState.userName ?? "");
     }
+    setOldManText("Great! Let's find a player for you to play with!")
   }, []);
 
   useEffect(() => {
@@ -29,10 +30,7 @@ export default function JoinGame() {
   return (
     <main style={styles.main}>
       <div style={styles.container}>
-        <div style={styles.header}>
-          <JumpingQuestion />
-          {!gameState.gameOn && <TitleLarge text="Esperando outro Player" />}
-        </div>
+          <OldMan />
       </div>
     </main>
   );

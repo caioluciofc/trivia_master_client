@@ -1,15 +1,22 @@
 'use client'; // This is a client component 👈🏽
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { TitleLarge } from '@/design_system';
 import { styles } from '../design_system/styles/trivia.style';
 import Link from 'next/link';
 import { Avatar } from '@/components';
+import { OldMan } from '@/components';
 import { useAppContext } from '@/src/app.provider';
 import TriviaAuth from './authentication';
 
 export default function TriviaMenu() {
-  const { authState, socketState } = useAppContext();
+  const { authState, socketState, setOldManText } = useAppContext();
+
+  useEffect(() => {
+    if (authState.authToken) {
+      setOldManText(`${authState.userName}! Good to have you here! Let's Trivia!`)
+    }
+  }, [authState.authToken])
 
   return (
     <main style={styles.main}>
@@ -20,7 +27,7 @@ export default function TriviaMenu() {
             <TitleLarge text="Trivia" />
           </div>
 
-          <Avatar />
+          <OldMan />
 
           <Link
             style={styles.button}

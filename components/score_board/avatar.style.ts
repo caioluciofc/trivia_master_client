@@ -6,13 +6,11 @@ import { CustomStyle } from '@/src/models';
 export const styles: CustomStyle = {
   main: {
     width: '100%',
-    height: 500,
-    borderRadius: 250,
+    height: 120,
     overflow: 'hidden',
   },
   avatar: {
     width: '100%',
-    height: 500,
-    borderRadius: 250,
+    height: 120,
   },
 };

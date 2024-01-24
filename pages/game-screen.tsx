@@ -2,15 +2,23 @@
 
 import React, { useEffect } from 'react';
 import { Colors, IconCrossMark, PrimaryButton, TitleLarge } from '@/design_system';
-import { styles } from '../design_system/styles/_game-screen.style';
+import { styles } from '../design_system/styles/join.style';
 import { useRouter } from 'next/router';
 import { useAppContext } from '@/src/app.provider';
-import { MoodFace } from '@/components';
+import { OldMan } from '@/components';
 import { ScoreBoard } from '@/components';
 
 export default function TriviaGame() {
   const router = useRouter();
-  const { gameState, socketState, answerQuestion, authState, clearGame, clearSocketGame } = useAppContext();
+  const {
+    gameState,
+    socketState,
+    answerQuestion,
+    authState,
+    clearGame,
+    clearSocketGame,
+    setOldManText,
+  } = useAppContext();
 
   function shuffleArray(array: string[]) {
     for (let i = array.length - 1; i > 0; i--) {
@@ -28,6 +36,12 @@ export default function TriviaGame() {
 
   useEffect(() => {
     if (gameState.gameResult) {
+      const resultTexts = {
+        'draw' : 'The game was a draw, not good but not bad.',
+        'win'  : 'CONGRATULATIONS, YOU ARE THE WINNER!',
+        'lost' : 'Bad, bad player, you lost!'
+      }
+      setOldManText(resultTexts[gameState.gameResult]);
       setTimeout(() => {
         clearGame();
         clearSocketGame();
@@ -36,46 +50,33 @@ export default function TriviaGame() {
     }
   }, [gameState.gameResult]);
 
+  useEffect(() => {
+      setOldManText(gameState.question ?? '');
+  }, [gameState.question]);
+
   return (
     <main style={styles.main}>
       <div style={styles.container}>
-        <div style={styles.menu}>
-          {gameState.gameResult && <MoodFace gameResult={gameState.gameResult} />}
-
-          {gameState.waitingNextQuestion && !gameState.gameResult && (
-            <TitleLarge text="Waiting for the other player(s)" color={Colors.background} />
-          )}
-
+          <OldMan />
+          <div style={styles.container}>
           {!gameState.waitingNextQuestion && !gameState.gameResult && (
-            <>
-              <div
-                style={styles.close}
-                onClick={() => {
-                  router.replace('/');
-                }}>
-                <IconCrossMark />
+              <div>
+                {gameState.answers &&
+                  shuffleArray(gameState.answers).map((answer) => {
+                    return (
+                      <PrimaryButton
+                        text={answer}
+                        key={answer}
+                        isLoading={false}
+                        onClick={() => _answerQuestion(answer)}
+                      />
+                    );
+                  })}
               </div>
-              <div style={styles.header}>
-                <TitleLarge text={gameState.question ?? ''} color={Colors.background} />
-              </div>
-              {gameState.answers &&
-                shuffleArray(gameState.answers).map((answer) => {
-                  return (
-                    <PrimaryButton
-                      text={answer}
-                      key={answer}
-                      isLoading={false}
-                      onClick={() => _answerQuestion(answer)}
-                    />
-                  );
-                })}
-            </>
           )}
-        </div>
-        <div>
+          </div>
           <ScoreBoard />
         </div>
-      </div>
     </main>
   );
 }

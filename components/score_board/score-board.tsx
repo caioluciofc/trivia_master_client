@@ -16,27 +16,15 @@ export function ScoreBoard() {
     }),
   });
 
+  
   if (gameState.players && rive) {
     rive.setTextRunValue('Player1', gameState.players[0])
     rive.setTextRunValue('Player2', gameState.players[1])
-    rive.setTextRunValue('Player1Score', "0")
-    rive.setTextRunValue('Player2Score', "0")
-  }
-
-  useEffect(() => {
-    if (rive && gameState.players && typeof gameState.score !== 'undefined') {
-      if (gameState.players) {
-        rive.setTextRunValue('Player1', gameState.players[0])
-        rive.setTextRunValue('Player2', gameState.players[1])
-      }
-      const player1 = rive.getTextRunValue('Player1') ?? ""
-      const player2 = rive.getTextRunValue('Player2') ?? ""
-      console.log(player1, player2)
-      console.log(gameState.score)
-      rive.setTextRunValue('Player1Score', gameState.score[player1].toString())
-      rive.setTextRunValue('Player2Score', gameState.score[player2].toString())
+    if (gameState.score) {
+      rive.setTextRunValue('Player1Score', gameState.score[gameState.players[0]].toString())
+      rive.setTextRunValue('Player2Score', gameState.score[gameState.players[1]].toString())
     }
-  }, [gameState])
+  }
 
   return (
     <div style={styles.main}>

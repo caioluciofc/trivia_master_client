@@ -29,19 +29,10 @@ export default function TriviaAuth() {
     }
     setIsSubmitting(true);
     setOldManText("Great, I'm signing you in!")
-
-    try {
-      await signin(username, password);
-      setIsSubmitting(false);
-      if (authState.authToken) {
-        router.push('/trivia-menu');
-      } else {
-        setOldManText("Oooops, your username or password is not correct!")
-      }
-    } catch {
-      setIsSubmitting(false);
+    await signin(username, password);
+    setIsSubmitting(false);
+    if (!authState.isLoading) {
       setOldManText("Oooops, your username or password is not correct!")
-      toast.error('Username or password is not correct!');
     }
   };
 
@@ -72,12 +63,14 @@ export default function TriviaAuth() {
           <TextField 
             type='text'
             defaultValue=''
+            placeHolder='Username'
             isDisabled={false}
             onChange={setUsername}
             />
           <TextField
             type='password'
             defaultValue=''
+            placeHolder='Password'
             isDisabled={false}
             onChange={setPassword}
             />
